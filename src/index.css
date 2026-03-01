@@ -1,0 +1,260 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  VELOCITY MOTORS - Premium 3D Car Marketplace
+  Design System: Dark luxury automotive theme with electric cyan accents
+  Inspiration: Porsche, Tesla, Rimac configurators
+*/
+
+@layer base {
+  :root {
+    /* Core palette - Dark luxury */
+    --background: 220 20% 6%;
+    --foreground: 210 20% 95%;
+
+    /* Card surfaces with subtle depth */
+    --card: 220 18% 10%;
+    --card-foreground: 210 20% 95%;
+
+    /* Popover/dialog surfaces */
+    --popover: 220 18% 12%;
+    --popover-foreground: 210 20% 95%;
+
+    /* Primary: Electric Cyan - the hero accent */
+    --primary: 187 100% 45%;
+    --primary-foreground: 220 20% 6%;
+    
+    /* Primary glow for gradients */
+    --primary-glow: 195 100% 55%;
+    --primary-muted: 187 60% 25%;
+
+    /* Secondary: Warm metallic silver */
+    --secondary: 220 10% 18%;
+    --secondary-foreground: 210 20% 90%;
+
+    /* Muted surfaces */
+    --muted: 220 15% 14%;
+    --muted-foreground: 215 15% 55%;
+
+    /* Accent: Amber/gold for premium highlights */
+    --accent: 40 90% 55%;
+    --accent-foreground: 220 20% 6%;
+
+    /* Destructive */
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 210 20% 98%;
+
+    /* Borders and inputs */
+    --border: 220 15% 18%;
+    --input: 220 15% 15%;
+    --ring: 187 100% 45%;
+
+    /* Radius */
+    --radius: 0.75rem;
+
+    /* Sidebar */
+    --sidebar-background: 220 20% 8%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 187 100% 45%;
+    --sidebar-primary-foreground: 220 20% 6%;
+    --sidebar-accent: 220 15% 14%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 220 15% 15%;
+    --sidebar-ring: 187 100% 45%;
+
+    /* Custom semantic tokens */
+    --gradient-hero: linear-gradient(135deg, hsl(187 100% 45% / 0.15), hsl(195 100% 55% / 0.05));
+    --gradient-card: linear-gradient(180deg, hsl(220 18% 12%), hsl(220 18% 8%));
+    --gradient-button: linear-gradient(135deg, hsl(187 100% 45%), hsl(195 100% 50%));
+    --gradient-accent: linear-gradient(135deg, hsl(40 90% 55%), hsl(35 85% 50%));
+    
+    /* Glassmorphism */
+    --glass-bg: hsl(220 18% 12% / 0.6);
+    --glass-border: hsl(220 15% 25% / 0.3);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 40px -10px hsl(187 100% 45% / 0.4);
+    --shadow-card: 0 10px 40px -15px hsl(0 0% 0% / 0.5);
+    --shadow-elevated: 0 25px 50px -12px hsl(0 0% 0% / 0.6);
+    
+    /* Animations */
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    /* Already dark by default */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
+}
+
+@layer components {
+  /* Glassmorphism card */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Glow effect on hover */
+  .glow-hover {
+    transition: box-shadow 0.3s var(--transition-smooth);
+  }
+  
+  .glow-hover:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    background: var(--gradient-button);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Hero gradient overlay */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  /* Button gradient */
+  .btn-gradient {
+    background: var(--gradient-button);
+    color: hsl(var(--primary-foreground));
+    font-weight: 600;
+    transition: all 0.3s var(--transition-smooth);
+  }
+  
+  .btn-gradient:hover {
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+  }
+
+  /* Accent button */
+  .btn-accent {
+    background: var(--gradient-accent);
+    color: hsl(var(--accent-foreground));
+    font-weight: 600;
+  }
+
+  /* Filter tag */
+  .filter-tag {
+    background: hsl(var(--primary) / 0.15);
+    color: hsl(var(--primary));
+    border: 1px solid hsl(var(--primary) / 0.3);
+  }
+
+  /* Price badge */
+  .price-badge {
+    background: var(--gradient-button);
+    color: hsl(var(--primary-foreground));
+    font-weight: 700;
+    box-shadow: 0 4px 15px hsl(187 100% 45% / 0.3);
+  }
+
+  /* Category chip */
+  .category-chip {
+    background: hsl(var(--secondary));
+    color: hsl(var(--foreground));
+    border: 1px solid hsl(var(--border));
+  }
+
+  /* 3D viewer container */
+  .viewer-container {
+    background: radial-gradient(ellipse at center, hsl(220 18% 14%), hsl(220 20% 6%));
+    border: 1px solid var(--glass-border);
+  }
+
+  /* Loading shimmer */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 0%,
+      hsl(var(--secondary)) 50%,
+      hsl(var(--muted)) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Float animation for hero elements */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  /* Pulse glow for CTAs */
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 20px hsl(187 100% 45% / 0.3); }
+    50% { box-shadow: 0 0 40px hsl(187 100% 45% / 0.5); }
+  }
+
+  /* Grid pattern background */
+  .grid-pattern {
+    background-image: 
+      linear-gradient(hsl(var(--border) / 0.3) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.3) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
+
+/* Model viewer custom styling */
+model-viewer {
+  width: 100%;
+  height: 100%;
+  --poster-color: transparent;
+}
+
+model-viewer::part(default-progress-bar) {
+  background: hsl(var(--primary));
+  height: 4px;
+}
