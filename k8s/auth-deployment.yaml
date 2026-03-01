@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: auth-container
-          image: self-healing-ci-cd-main-auth-service:latest
-          imagePullPolicy: IfNotPresent
+          image: harshranjan539/auth-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 4000
           envFrom:

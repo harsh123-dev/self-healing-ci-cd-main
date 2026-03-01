@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: catalog-container
-          image: self-healing-ci-cd-main-backend:latest
-          imagePullPolicy: IfNotPresent
+          image: harshranjan539/catalog-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           envFrom:

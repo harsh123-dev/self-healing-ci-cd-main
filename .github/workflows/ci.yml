@@ -33,6 +33,7 @@ jobs:
           push: true
           tags: |
             harshranjan539/catalog-service:${{ steps.vars.outputs.SHA_SHORT }}
+            harshranjan539/catalog-service:latest
 
       - name: Build and Push Auth Image
         uses: docker/build-push-action@v5
@@ -41,3 +42,4 @@ jobs:
           push: true
           tags: |
             harshranjan539/auth-service:${{ steps.vars.outputs.SHA_SHORT }}
+            harshranjan539/auth-service:latest
