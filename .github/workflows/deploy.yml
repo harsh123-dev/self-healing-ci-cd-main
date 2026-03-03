@@ -36,3 +36,19 @@ jobs:
           docker build -t auth-service ./auth-service
           docker tag auth-service:latest 253490771520.dkr.ecr.ap-south-1.amazonaws.com/auth-service:${{ github.sha }}
           docker push 253490771520.dkr.ecr.ap-south-1.amazonaws.com/auth-service:${{ github.sha }}
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig \
+            --region $AWS_REGION \
+            --name car-marketplace-cluster
+
+      - name: Deploy to EKS
+        run: |
+          kubectl set image deployment/catalog-deployment \
+            catalog-container=253490771520.dkr.ecr.ap-south-1.amazonaws.com/catalog-service:${{ github.sha }}
+
+          kubectl set image deployment/auth-deployment \
+            auth-container=253490771520.dkr.ecr.ap-south-1.amazonaws.com/auth-service:${{ github.sha }}
+
+          kubectl rollout status deployment/catalog-deployment
+          kubectl rollout status deployment/auth-deployment
