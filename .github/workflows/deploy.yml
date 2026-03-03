@@ -42,12 +42,17 @@ jobs:
           aws eks update-kubeconfig \
             --region $AWS_REGION \
             --name car-marketplace-cluster
-      - name: Apply Kubernetes manifests
+
+      - name: Check if cluster reachable
+        id: cluster_check
+        run: |
+          kubectl get nodes
+        continue-on-error: true    
+
+      - name: Deploy to EKS
+        if: steps.cluster_check.outcome == 'success'
         run: |
           kubectl apply -f k8s/
-          
-      - name: Deploy to EKS
-        run: |
           kubectl set image deployment/catalog-deployment \
             catalog-container=253490771520.dkr.ecr.ap-south-1.amazonaws.com/catalog-service:${{ github.sha }}
 
