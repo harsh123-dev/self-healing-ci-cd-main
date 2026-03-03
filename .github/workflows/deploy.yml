@@ -38,6 +38,7 @@ jobs:
           docker tag auth-service:latest 253490771520.dkr.ecr.ap-south-1.amazonaws.com/auth-service:${{ github.sha }}
           docker push 253490771520.dkr.ecr.ap-south-1.amazonaws.com/auth-service:${{ github.sha }}
       - name: Update kubeconfig
+        continue-on-error: true
         run: |
           aws eks update-kubeconfig \
             --region $AWS_REGION \
@@ -47,12 +48,13 @@ jobs:
         id: cluster_check
         run: |
           kubectl get nodes
-        continue-on-error: true    
+        continue-on-error: true
 
       - name: Deploy to EKS
         if: steps.cluster_check.outcome == 'success'
         run: |
           kubectl apply -f k8s/
+
           kubectl set image deployment/catalog-deployment \
             catalog-container=253490771520.dkr.ecr.ap-south-1.amazonaws.com/catalog-service:${{ github.sha }}
 
