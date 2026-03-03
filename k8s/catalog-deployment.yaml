@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: catalog-container
-          image: harshranjan539/catalog-service:latest
+          image: 253490771520.dkr.ecr.ap-south-1.amazonaws.com/catalog-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 3000

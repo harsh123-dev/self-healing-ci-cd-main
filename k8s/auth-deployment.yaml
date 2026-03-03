@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: auth-container
-          image: harshranjan539/auth-service:latest
+          image: 253490771520.dkr.ecr.ap-south-1.amazonaws.com/auth-service:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 4000
