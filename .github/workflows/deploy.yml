@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -42,7 +42,10 @@ jobs:
           aws eks update-kubeconfig \
             --region $AWS_REGION \
             --name car-marketplace-cluster
-
+      - name: Apply Kubernetes manifests
+        run: |
+          kubectl apply -f k8s/
+          
       - name: Deploy to EKS
         run: |
           kubectl set image deployment/catalog-deployment \
