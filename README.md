@@ -1,73 +1,292 @@
-# Welcome to your Lovable project
+🚀 AI-Powered Self-Healing CI/CD for Microservices
+<p align="center">
 
-## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
 
-## How can I edit this code?
 
-There are several ways of editing your application.
+</p>
+📖 Project Overview
 
-**Use Lovable**
+This project implements a production-style DevOps platform for a microservice application.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+It demonstrates:
 
-Changes made via Lovable will be committed automatically to this repo.
+Infrastructure as Code
 
-**Use your preferred IDE**
+Container orchestration
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+CI/CD automation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Observability
 
-Follow these steps:
+Security best practices
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+AI-assisted deployment debugging
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Self-healing infrastructure
 
-# Step 3: Install the necessary dependencies.
-npm i
+The system automatically builds, deploys, monitors, and recovers services when failures occur.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+🏗 System Architecture
+Developer Push
+      │
+      ▼
+GitHub Actions CI/CD
+      │
+      ├── Build Docker Images
+      │
+      ├── Push to AWS ECR
+      │
+      └── Deploy to Kubernetes
+              │
+              ▼
+        AWS EKS Cluster
+              │
+     ┌────────┼─────────┐
+     │        │         │
+Catalog   Auth Service  Monitoring
+Service                 (Prometheus)
+     │        │
+     ▼        ▼
+Grafana Dashboards
 
-**Edit a file directly in GitHub**
+If deployment fails:
+      │
+      ▼
+AI Log Analyzer
+      │
+      ▼
+Self-Healing Controller
+      │
+      ▼
+Automatic Rollback
+✨ Key Features
+📦 Microservice Architecture
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Two backend services:
 
-**Use GitHub Codespaces**
+Service	Description
+Catalog Service	Provides car marketplace API
+Auth Service	Handles authentication and JWT verification
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Both services are containerized and deployed with Kubernetes.
 
-## What technologies are used for this project?
+☁️ Infrastructure as Code
 
-This project is built with:
+Infrastructure is fully managed with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Terraform
 
-## How can I deploy this project?
+Provisioned resources:
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+AWS VPC
 
-## Can I connect a custom domain to my Lovable project?
+Subnets
 
-Yes, you can!
+EKS Cluster
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Node Groups
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+IAM Roles
+
+ECR Container Registry
+
+⚙️ CI/CD Pipeline
+
+Automated using:
+
+GitHub Actions
+
+Pipeline stages:
+
+Build → Push → Deploy → Verify Rollout
+
+Images are tagged using commit SHA for traceable deployments.
+
+Example:
+
+catalog-service:3f9c2ab
+📊 Observability
+
+Monitoring stack:
+
+Tool	Purpose
+Prometheus	Collect metrics
+Grafana	Visual dashboards
+
+Metrics monitored:
+
+Pod CPU usage
+
+Memory usage
+
+Node health
+
+Deployment performance
+
+🔐 Security Hardening
+
+Implemented best practices:
+
+Kubernetes Secrets
+
+IAM Roles for Service Accounts (IRSA)
+
+Network Policies
+
+Pod Security Context
+
+This ensures secure access to AWS services without storing credentials in containers.
+
+🤖 AI-Assisted Debugging
+
+If a deployment fails, the pipeline automatically:
+
+1️⃣ Fetches pod logs
+2️⃣ Sends logs to an LLM
+3️⃣ AI analyzes root cause
+
+Example output:
+
+AI Diagnosis:
+
+The container failed because the JWT_SECRET
+environment variable is missing.
+
+Ensure the Kubernetes Secret is configured properly.
+🔄 Self-Healing Infrastructure
+
+A Kubernetes controller continuously monitors pod health.
+
+If a failure occurs:
+
+CrashLoopBackOff
+ImagePullBackOff
+
+The system automatically performs:
+
+kubectl rollout undo
+
+This restores the last stable deployment.
+
+📁 Project Structure
+.
+├── backend
+├── auth-service
+├── frontend
+│
+├── k8s
+│   ├── catalog-deployment.yaml
+│   ├── auth-deployment.yaml
+│   ├── services.yaml
+│   └── network-policy.yaml
+│
+├── infra
+│   └── terraform
+│
+├── ai
+│   └── analyze_logs.py
+│
+├── self-healing-agent
+│   ├── monitor.py
+│   └── Dockerfile
+│
+└── .github
+    └── workflows
+        └── deploy.yml
+🛠 Technologies Used
+Category	Tools
+Frontend	React + Vite
+Backend	Node.js + Express
+Containers	Docker
+Orchestration	Kubernetes
+Cloud	AWS
+Infrastructure	Terraform
+CI/CD	GitHub Actions
+Monitoring	Prometheus + Grafana
+AI	Groq LLM
+Registry	AWS ECR
+▶️ Running the Project Locally
+
+Run services locally using Docker Compose:
+
+docker compose up --build
+
+Access services:
+
+Service	URL
+Frontend	http://localhost:5173
+
+Catalog API	http://localhost:3000/api/cars
+
+Auth Service	http://localhost:4000
+📸 Demo
+
+Example API response:
+
+Example request:
+
+http://localhost:3000/api/cars
+
+Response:
+
+{
+ "data":[
+  {"id":1,"name":"Tesla Model S","price":80000},
+  {"id":2,"name":"BMW M4","price":75000}
+ ]
+}
+🚀 Deploying to Kubernetes
+
+Provision infrastructure:
+
+terraform apply
+
+Deploy application:
+
+kubectl apply -f k8s/
+
+Check pods:
+
+kubectl get pods
+🧪 Self-Healing Flow
+New deployment pushed
+        ↓
+Pod crashes
+        ↓
+Self-healing agent detects failure
+        ↓
+Automatic rollback triggered
+
+System recovers without human intervention.
+
+🔮 Future Improvements
+
+Possible enhancements:
+
+GitOps deployment with ArgoCD
+
+Distributed tracing (OpenTelemetry)
+
+Canary deployments
+
+Chaos engineering tests
+
+👨‍💻 Author
+
+Harsh Ranjan
+Computer Science Engineering Student
+
+⭐ Why This Project Is Interesting
+
+This project demonstrates real-world DevOps practices, including:
+
+Kubernetes orchestration
+
+Cloud infrastructure automation
+
+AI-based debugging
+
+Self-healing deployment systems
+
+It combines DevOps + AI + Cloud Engineering concepts in a single platform.
