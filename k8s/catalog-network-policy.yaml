@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: catalog-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: catalog
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: auth
+      ports:
+        - protocol: TCP
+          port: 3000

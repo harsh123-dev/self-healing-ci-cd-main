@@ -1,0 +1,4 @@
+Error: JWT_SECRET environment variable is not defined
+Container failed to start
+CrashLoopBackOff detected
+Node.js process exited with code 1

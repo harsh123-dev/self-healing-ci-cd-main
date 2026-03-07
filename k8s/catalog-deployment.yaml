@@ -12,6 +12,7 @@ spec:
       labels:
         app: catalog
     spec:
+      serviceAccountName: catalog-sa
       containers:
         - name: catalog-container
           image: 253490771520.dkr.ecr.ap-south-1.amazonaws.com/catalog-service:latest

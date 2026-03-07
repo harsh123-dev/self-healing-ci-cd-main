@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: self-healing-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: healing-agent
+  template:
+    metadata:
+      labels:
+        app: healing-agent
+    spec:
+      containers:
+        - name: healing-agent
+          image: <ECR>/healing-agent
