@@ -270,6 +270,30 @@ Automatic rollback triggered
 
 ---
 
+## 📸 Screenshots
+
+### 🖥️ Frontend UI
+![Frontend UI](screenshots/frontend.png)
+
+### 📡 Catalog API Response
+![Catalog API](screenshots/catalog-api.png)
+
+### ⚙️ GitHub Actions CI/CD Pipeline
+![CI/CD Pipeline](screenshots/cicd-pipeline.png)
+
+### 📊 Grafana Dashboard
+![Grafana Dashboard](screenshots/grafana-dashboard.png)
+
+### 🤖 AI Diagnosis Output
+![AI Diagnosis](screenshots/ai-diagnosis.png)
+
+### 🔄 Self-Healing Rollback
+![Self Healing](screenshots/self-healing-rollback.png)
+
+> 📁 To add your screenshots: create a `screenshots/` folder in the root of your repo and drop your images in with the matching filenames above.
+
+---
+
 ## 🔮 Future Improvements
 
 - [ ] GitOps deployment with **ArgoCD**
